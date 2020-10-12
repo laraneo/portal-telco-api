@@ -30,7 +30,13 @@ class RoleRepository  {
     }
   
     public function all() {
-      return $this->model->all();
+      $user = auth()->user();
+      $isManager = $user->hasRole('manager');
+      return $this->model->query()->where(function($q) use($isManager) {
+        if($isManager) {
+          $q->where('slug', 'end-user');
+        }
+      })->get();
     }
 
     public function delete($id) {

@@ -24,7 +24,9 @@ class User extends Authenticatable
         'username', 
         'share_from', 
         'share_to',
-        'username_legacy'
+        'username_legacy',
+        'role',
+        'client_id',
     ];
 
     /**

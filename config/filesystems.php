@@ -67,9 +67,9 @@ return [
             'driver' => 'local',
             'root' => public_path('storage/partners'),
         ],
-        'reportedPayments' => [
+        'users' => [
             'driver' => 'local',
-            'root' => public_path('storage/reportedPayments'),
+            'root' => public_path('storage/users'),
         ],
     ],
 

@@ -33,7 +33,17 @@ class UserRepository  {
     }
 
     public function all() {
-      return $this->model->query()->with('roles')->get();
+      $user = auth()->user();
+      $isManager = $user->hasRole('manager');
+      return $this->model->query()->where(function($q) use($isManager, $user) {    
+        if($user->client_id !== null) {
+          $q->where('client_id', $user->client_id);
+        }
+      })->with('roles')->whereHas('roles', function($q) use ($isManager){
+        if($isManager){
+          $q->where('slug', 'end-user');
+        }
+      })->get();
     }
 
     public function delete($id) {
@@ -59,14 +69,25 @@ class UserRepository  {
      * @param  object $queryFilter
     */
     public function search($queryFilter) {
+        $user = auth()->user();
+        $isManager = $user->hasRole('manager');
         $searchQuery = trim($queryFilter->query('term'));
         $this->share = $queryFilter->query('term');
         $requestData = ['name', 'username', 'email'];
-        $search = $this->model->where(function($q) use($requestData, $searchQuery) {
+        $search = $this->model->where(function($q) use($requestData, $searchQuery, $user ) {
                     foreach ($requestData as $field) {
                        $q->orWhere($field, 'like', "%{$searchQuery}%");
                     }
-                  })->with('roles')->get();
+
+                    if($user->client_id !== null) {
+                      $q->where('client_id', $user->client_id);
+                    }
+
+                  })->with('roles')->whereHas('roles', function($q) use ($isManager){
+                    if($isManager){
+                      $q->where('slug', 'end-user');
+                    }
+                  })->get();
         return $search;
     }
     public function check($request)

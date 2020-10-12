@@ -65,7 +65,8 @@ class PassportController extends Controller
             'password' => $request->password
         ];
  
-        if ($exist && auth()->attempt($credentials)) {
+        if ($exist && auth()->attempt($credentials)) {    
+            Storage::disk('users')->makeDirectory(''.auth()->user()->id .'/',0775, true, true);
             $token = auth()->user()->createToken('TutsForWeb')->accessToken;
             $user = auth()->user();
             $user->roles = auth()->user()->getRoles();

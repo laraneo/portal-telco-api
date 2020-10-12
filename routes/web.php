@@ -196,23 +196,14 @@ Route::prefix('api/v1')->group(function () {
 
         Route::resource('/notificacion', 'NotificacionesController');
         
-        // Back Office
-        
-        Route::resource('/reporte-pagos', 'ReportePagosController');
-        Route::get('/reporte-pagos-filter', 'ReportePagosController@filter');
+        //Route::resource('/process', 'ProcessController');
+        Route::get('/process-list', 'ProcessController@getList');
 
-        Route::get('/get-client', 'ClientesController@findByNit');
+        //Route::resource('/client', 'ClientController');
+        Route::get('/client-list', 'ClientController@getList');
 
-        Route::get('/get-balance', 'WebServiceController@getBalance');
-        Route::get('/get-reported-payments', 'ReportePagosController@findByLogin');
-        Route::get('/get-unpaid-invoices', 'WebServiceController@getUnpaidInvoices');
-        Route::get('/get-unpaid-invoices-by-share', 'WebServiceController@getUnpaidInvoicesByShare');
-        Route::get('/status-account', 'WebServiceController@getStatusAccount');
-        Route::get('/set-order', 'WebServiceController@getOrder');
-        Route::get('/set-invoice-payment', 'WebServiceController@setManualInvoicePayment');
-
-        
-        Route::get('/get-tasa', 'TasaCambioController@index');
+        Route::resource('/process-request', 'ProcessRequestController');
+        Route::get('/process-request-by-manager', 'ProcessRequestController@allByManager');
         
     });
 });
