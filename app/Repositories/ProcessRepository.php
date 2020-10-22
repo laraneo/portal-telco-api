@@ -16,4 +16,8 @@ class ProcessRepository  {
       return $this->model->all();
     }
 
+    public function getByCategory($category) {
+      return $this->model->query()->where('idProcessCategory', $category)->get();
+    }
+
 }

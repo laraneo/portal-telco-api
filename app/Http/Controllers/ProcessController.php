@@ -26,4 +26,18 @@ class ProcessController extends Controller
             'data' => $data
         ]);
     }
+
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getByCategory(Request $request)
+    {
+        $data = $this->service->getByCategory($request['category']);
+        return response()->json([
+            'success' => true,
+            'data' => $data
+        ]);
+    }
 }

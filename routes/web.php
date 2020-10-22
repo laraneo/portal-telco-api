@@ -198,6 +198,11 @@ Route::prefix('api/v1')->group(function () {
         
         //Route::resource('/process', 'ProcessController');
         Route::get('/process-list', 'ProcessController@getList');
+        Route::get('/process-by-category', 'ProcessController@getByCategory');
+
+                
+        //Route::resource('/process-category', 'ProcessCategoryController');
+        Route::get('/process-category-list', 'ProcessCategoryController@getList');
 
         //Route::resource('/client', 'ClientController');
         Route::get('/client-list', 'ClientController@getList');

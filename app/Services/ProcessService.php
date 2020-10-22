@@ -15,4 +15,9 @@ class ProcessService {
 		return $this->repository->getList();
 	}
 
+	public function getByCategory($category) {
+		return $this->repository->getByCategory($category);
+	  }
+  
+
 }

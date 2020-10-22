@@ -17,6 +17,7 @@ class Process extends Model
         'nPrice',
         'sTypeProcess',
         'nStatus',
+        'idProcessCategory'
     ];
 
     public $timestamps = false;
