@@ -19,6 +19,7 @@ class ProcessRequest extends Model
         'user_id',
         'reference',
         'description',
+        'path'
     ];
 
     public $timestamps = false;

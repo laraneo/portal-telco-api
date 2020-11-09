@@ -17,7 +17,7 @@ class ProcessRepository  {
     }
 
     public function getByCategory($category) {
-      return $this->model->query()->where('idProcessCategory', $category)->get();
+      return $this->model->query()->where('idProcessCategory', $category)->where('nStatus', 1)->get();
     }
 
 }

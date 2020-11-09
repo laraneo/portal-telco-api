@@ -69,7 +69,7 @@ return [
         ],
         'users' => [
             'driver' => 'local',
-            'root' => public_path('storage/users'),
+            'root' => public_path('storage/clients/users'),
         ],
     ],
 

@@ -140,4 +140,18 @@ class UserController extends Controller
         $userRequest = $request->all();
         return $this->userService->updatePassword($userRequest);
     }
+
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getUsersByManager()
+    {
+        $banks = $this->userService->getUsersByManager();
+        return response()->json([
+            'success' => true,
+            'data' => $banks
+        ]);
+    }
 }

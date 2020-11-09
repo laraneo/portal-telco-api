@@ -104,4 +104,9 @@ class UserRepository  {
     {
       return $this->model->where($field, $value)->where('id', '!=',$id)->first();
     }
+
+    public function getUsersByManager() {
+      $user = auth()->user()->client_id;
+      return $this->model->query()->where('client_id', $user)->get();
+    }
 }

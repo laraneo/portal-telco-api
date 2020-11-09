@@ -138,6 +138,7 @@ Route::prefix('api/v1')->group(function () {
         Route::resource('/user', 'UserController');
         Route::get('/user-search', 'UserController@search');
         Route::post('/user-update-password', 'UserController@updatePassword');
+        Route::get('/users-by-manager', 'UserController@getUsersByManager');
 
         Route::resource('/transaction-type', 'TransactionTypeController');
         Route::get('/transaction-type-list', 'TransactionTypeController@getList');

@@ -166,4 +166,8 @@ class UserService {
 			]);
 
 		}
+
+		public function getUsersByManager() {
+			return $this->repository->getUsersByManager();
+		}
 }
