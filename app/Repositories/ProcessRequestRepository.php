@@ -56,22 +56,22 @@ class ProcessRequestRepository  {
 
        
 
-      })->where('user_id', $user)->with('type')->orderBy('dDate', 'DESC')->get();
+      })->where('user_id', $user)->with(['type','user'])->orderBy('dDate', 'DESC')->get();
       foreach ($data as $key => $value) {
         if($value->sSourceFile !== null) {
-          $data[$key]->sSourceFileDownload = url('storage/clients/users/'.$value->user_id.'/request_'.$value->id.'/'.$value->sSourceFile);
+          $data[$key]->sSourceFileDownload = url('storage/clients/'.$value->user()->first()->client_id.'/users/'.$value->user_id.'/request_'.$value->id.'/'.$value->sSourceFile);
         } else {
           $value->sSourceFile = null;
         }
 
         if($value->sTargetFile !== null) {
-          $data[$key]->sTargetFileDownload = url('storage/clients/users/'.$value->user_id.'/request_'.$value->id.'/'.$value->sTargetFile);
+          $data[$key]->sTargetFileDownload = url('storage/clients/'.$value->user()->first()->client_id.'/users/'.$value->user_id.'/request_'.$value->id.'/'.$value->sTargetFile);
         } else {
           $value->sTargetFile = null;
         }
 
         if($value->sLogFile !== null) {
-          $data[$key]->sLogFileDownload = url('storage/clients/users/'.$value->user_id.'/request_'.$value->id.'/'.$value->sLogFile);
+          $data[$key]->sLogFileDownload = url('storage/clients/'.$value->user()->first()->client_id.'/users/'.$value->user_id.'/request_'.$value->id.'/'.$value->sLogFile);
         } else {
           $value->sLogFile = null;
         }
@@ -134,19 +134,19 @@ class ProcessRequestRepository  {
       })->with(['type','user'])->orderBy('user_id', 'ASC')->orderBy('id', 'ASC')->get();
       foreach ($data as $key => $value) {
         if($value->sSourceFile !== null) {
-          $data[$key]->sSourceFileDownload = url('storage/clients/users/'.$value->user_id.'/request_'.$value->id.'/'.$value->sSourceFile);
+          $data[$key]->sSourceFileDownload = url('storage/clients/'.$value->user()->first()->client_id.'/users/'.$value->user_id.'/request_'.$value->id.'/'.$value->sSourceFile);
         } else {
           $value->sSourceFile = null;
         }
 
         if($value->sTargetFile !== null) {
-          $data[$key]->sTargetFileDownload = url('storage/clients/users/'.$value->user_id.'/request_'.$value->id.'/'.$value->sTargetFile);
+          $data[$key]->sTargetFileDownload = url('storage/clients/'.$value->user()->first()->client_id.'/users/'.$value->user_id.'/request_'.$value->id.'/'.$value->sTargetFile);
         } else {
           $value->sTargetFile = null;
         }
 
         if($value->sLogFile !== null) {
-          $data[$key]->sLogFileDownload = url('storage/clients/users/'.$value->user_id.'/request_'.$value->id.'/'.$value->sLogFile);
+          $data[$key]->sLogFileDownload = url('storage/clients/'.$value->user()->first()->client_id.'/users/'.$value->user_id.'/request_'.$value->id.'/'.$value->sLogFile);
         } else {
           $value->sLogFile = null;
         }

@@ -86,7 +86,7 @@ class ProcessRequestService {
             'description' => $request['description'],
         ];
 		$data = $this->repository->create($attr);
-		Storage::disk('users')->makeDirectory(auth()->user()->id .'/request_'.$data->id.'/',0775, true, true);
+		Storage::disk('users')->makeDirectory('/'.auth()->user()->client_id.'/users/'.$user.'/request_'.$data->id.'/',0775, true, true);
         if($request['file'] !== null) {
 			$hash = bcrypt(rand());
 			$hash = substr($hash,0,20);
@@ -97,18 +97,18 @@ class ProcessRequestService {
 				if($parseFile->ext === 'jpg' || $parseFile->ext === 'jpeg') {
 					$filename = $date.'-'.$data->id.'-'.$hash.'.png';
 				}
-				\Image::make($request['file'])->save(public_path('storage/clients/users/'.$user.'/request_'.$data->id.'/').$filename);
+				\Image::make($request['file'])->save(public_path('storage/clients/'.auth()->user()->client_id.'/users/'.$user.'/request_'.$data->id.'/').$filename);
 			} else {
 				//Storage::disk('payments')->put($filename,$parseFile->content);
-				\File::put(public_path(). '/storage/clients/users/'.$user.'/request_'.$data->id.'/'.$filename, $parseFile->content);
+				\File::put(public_path(). '/storage/clients/'.auth()->user()->client_id.'/users/'.$user.'/request_'.$data->id.'/'.$filename, $parseFile->content);
 			}
 			// Storage::disk('users')->put($user.'/request_'.$data->id.'/target_'.$date.'-'.$data->id.'-'.$hash.'.xml', 'Test');
 			// Storage::disk('users')->put($user.'/request_'.$data->id.'/log_'.$date.'-'.$data->id.'-'.$hash.'.txt', 'Test');
 			$attr = [
 				'sSourceFile' => $filename,
 				'sTargetFile' => 'target_'.$date.'-'.$data->id.'-'.$hash.'.xml',
-				'sLogFile' => 'log_'.$date.'-'.$data->id.'-'.$hash.'.txt',
-				'path' => '/storage/clients/users/'.$user.'/request_'.$data->id,
+			'sLogFile' => 'log_'.$date.'-'.$data->id.'-'.$hash.'.txt',
+				'path' => '/storage/clients/'.auth()->user()->client_id.'/users/'.$user.'/request_'.$data->id,
 			];
 			$this->repository->update($data->id, $attr);
         }
